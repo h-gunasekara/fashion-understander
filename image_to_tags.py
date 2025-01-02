@@ -8,6 +8,10 @@ import logging
 from datetime import datetime
 import time
 from tqdm import tqdm
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(
@@ -21,7 +25,10 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # OpenAI API configuration
-client = OpenAI()
+api_key = os.getenv('OPENAI_API_KEY')
+if not api_key:
+    raise ValueError("Please set the OPENAI_API_KEY environment variable")
+client = OpenAI(api_key=api_key)
 
 def encode_image(image_path):
     """Encode image to base64."""

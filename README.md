@@ -11,12 +11,10 @@ This system consists of three main components:
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed:
+You need:
 - Python 3.8 or higher
-- Google Chrome browser (latest version)
-- Git (for cloning the repository)
-- A text editor (VS Code recommended)
-- An OpenAI API key (paid account required)
+- Google Chrome browser
+- OpenAI API key (paid account required)
 
 ## Installation
 
@@ -41,123 +39,99 @@ source venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
+This will install all necessary packages including:
+- openai: For AI image analysis
+- python-dotenv: For environment variable management
+- selenium & undetected-chromedriver: For web scraping
+- beautifulsoup4: For HTML parsing
+- requests: For downloading images
+- tqdm: For progress bars
 
-4. Set up your environment variables:
-   - Create a `.env` file in the project root
-   - Add your OpenAI API key:
-   ```
-   OPENAI_API_KEY=your_api_key_here
-   ```
+4. Set up your OpenAI API key:
+Create a `.env` file in the project root with:
+```
+OPENAI_API_KEY=your_api_key_here
+```
 
 ## Usage Guide
 
 ### 1. Downloading Images
-The `download_images.py` script scrapes sweater images from Shopbop:
-
+Run the scraper:
 ```bash
 python download_images.py
 ```
 
 This will:
 - Create a `shopbop_images` directory
-- Download images from the first 5 pages of Shopbop's sweater section
+- Download images from Shopbop's sweater section
 - Save images with descriptive filenames
 
-**Note**: The script includes random delays to be respectful to Shopbop's servers.
+**Note**: The script includes delays to respect Shopbop's servers.
 
 ### 2. Analyzing Images
-The `image_to_tags.py` script analyzes each downloaded image:
-
+Run the analyzer:
 ```bash
 python image_to_tags.py
 ```
 
-This will:
-- Process each image in `shopbop_images`
-- Generate detailed design analysis using OpenAI's Vision API
-- Save results in `shopbop_analysis.json`
-
-The analysis includes:
+This analyzes each image for:
 - Color analysis
 - Design details
 - Style elements
-- Visual impact assessment
+- Visual impact
 
 ### 3. Identifying Patterns
-The `analyze_tags.py` script identifies trends and patterns:
-
+Generate the trend report:
 ```bash
 python analyze_tags.py
 ```
 
-This generates:
-- A markdown report with identified patterns
-- Visual examples for each trend
-- Price point analysis
-- Common style combinations
+This creates:
+- A markdown report with trends
+- Visual examples
+- Price analysis
+- Style combinations
 
 ## Output Files
 
-1. `shopbop_images/`: Directory containing downloaded sweater images
-2. `shopbop_analysis.json`: Raw analysis data for each image
-3. `shopbop_style_patterns_[timestamp].md`: Final trend analysis report
-
-## Logging and Monitoring
-
-- All scripts include detailed logging
-- Logs are saved in `image_analysis.log`
-- Console output shows progress and any errors
+1. `shopbop_images/`: Downloaded sweater images
+2. `shopbop_analysis.json`: Raw analysis data
+3. `shopbop_style_patterns_[timestamp].md`: Trend report
+4. `image_analysis.log`: Process logs
 
 ## Troubleshooting
 
-Common issues and solutions:
-
 1. **Chrome Driver Issues**:
-   - Ensure Chrome browser is up to date
-   - Try clearing Chrome's cache
-   - Check if antivirus is blocking the driver
+   - Update Chrome to latest version
+   - Clear Chrome's cache
+   - Check antivirus settings
 
 2. **API Rate Limits**:
-   - The system includes built-in delays
-   - Monitor your OpenAI API usage
-   - Adjust delays if needed in the code
+   - Monitor OpenAI API usage
+   - Adjust delays if needed
 
 3. **Image Download Failures**:
-   - Check your internet connection
-   - Verify Shopbop's website is accessible
-   - Try running the script again for failed downloads
+   - Check internet connection
+   - Verify Shopbop's accessibility
+   - Retry failed downloads
 
 ## Best Practices
 
 1. **Rate Limiting**:
-   - Don't modify the built-in delays
-   - Be respectful of Shopbop's servers
-   - Monitor your API usage
+   - Keep default delays
+   - Monitor API usage
 
 2. **Data Management**:
-   - Regularly backup your analysis results
-   - Clean up old images if not needed
-   - Keep your API key secure
-
-3. **System Resources**:
-   - Close other Chrome instances before running
-   - Ensure sufficient disk space for images
-   - Monitor memory usage during analysis
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+   - Backup analysis results
+   - Clean old images
+   - Secure API key
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License - see LICENSE file for details.
 
 ## Acknowledgments
 
-- OpenAI for providing the Vision API
-- Shopbop for the source material
-- Selenium and BeautifulSoup4 for web scraping capabilities
+- OpenAI for Vision API
+- Shopbop for source material
+- Selenium and BeautifulSoup4
